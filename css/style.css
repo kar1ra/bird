@@ -1,0 +1,688 @@
+/**
+  Нормализация блочной модели
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/**
+     Убираем внутренние отступы слева тегам списков,
+     у которых есть атрибут class
+    */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+     Убираем внешние отступы body и двум другим тегам,
+     у которых есть атрибут class
+    */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+     Убираем внешние отступы вертикали нужным тегам,
+     у которых есть атрибут class
+    */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+     Убираем стандартный маркер маркированному списку,
+     у которого есть атрибут class
+    */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+     Обнуляем вертикальные внешние отступы параграфа,
+     объявляем локальную переменную для внешнего отступа вниз,
+     чтобы избежать взаимодействие с более сложным селектором
+    */
+p {
+  --paragraphMarginBottom: 24px;
+
+  margin-block: 0;
+}
+
+/**
+     Внешний отступ вниз для параграфа без атрибута class,
+     который расположен не последним среди своих соседних элементов
+    */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+     Упрощаем работу с изображениями
+    */
+img {
+  display: block;
+}
+
+/**
+     Наследуем свойства шрифт для полей ввода
+    */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+       Пригодится в большинстве ситуаций
+       (когда, например, нужно будет "прижать" футер к низу сайта)
+      */
+  height: 100%;
+}
+
+/**
+     Плавный скролл
+    */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+       Пригодится в большинстве ситуаций
+       (когда, например, нужно будет "прижать" футер к низу сайта)
+      */
+  min-height: 100%;
+  /**
+       Унифицированный интерлиньяж
+      */
+  line-height: 1.5;
+  font-family: "Raleway", sans-serif;
+}
+
+/**
+     Приводим к единому цвету svg-элементы
+    */
+svg *[fill] {
+  fill: currentColor;
+}
+svg *[stroke] {
+  stroke: currentColor;
+}
+
+/**
+     Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+    */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+     Удаляем все анимации и переходы для людей,
+     которые предпочитают их не использовать
+    */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+hr {
+  border-color: none;
+  position: absolute;
+}
+nav {
+  height: 100px;
+  background-color: #e1ede6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22%;
+  padding: 0px 39px 0px 39px;
+}
+.logo {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+.logo-name {
+  color: #598d66;
+  font-weight: 700;
+  font-size: 20px;
+}
+.nav-ul {
+  display: flex;
+  font-weight: 500;
+  gap: 60px;
+}
+.nav-links {
+  display: flex;
+  gap: 60px;
+}
+a.nav-a {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  color: #2c2d35;
+}
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 70px;
+  padding: 0px 39px 0px 39px;
+}
+.bird-img {
+  min-width: 195px;
+  min-height: 239px;
+}
+.hero-text {
+  width: 540px;
+}
+.hero-h1 {
+  font-weight: 500;
+  font-size: 60px;
+  color: #2c2d35;
+  line-height: 66px;
+  margin-bottom: 20px;
+}
+.hero-span {
+  color: #598d66;
+}
+.hero-p {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #86928b;
+  margin-bottom: 60px;
+}
+.hero-button {
+  background-color: #fff;
+  padding: 20px 60px 20px 60px;
+  border: 1px solid #598d66;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 23px;
+  color: #598d66;
+}
+.title-h2 {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 44px;
+}
+.catalog {
+  display: grid;
+  justify-content: center;
+  margin-bottom: 70px;
+}
+.catalog-title {
+  display: flex;
+  justify-content: center;
+  gap: 380px;
+  margin-bottom: 30px;
+}
+.title-ul {
+  display: flex;
+  gap: 32px;
+}
+.catalog-button {
+  padding: 10px 20px 10px 20px;
+  border-radius: 20px;
+  background-color: #d4e8d9;
+  color: #2c2d35;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 23px;
+}
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1188px;
+
+  gap: 30px;
+  padding: 0px 39px 0px 39px;
+}
+.card {
+  width: 350px;
+  height: 730px;
+  background-color: #e1ede6;
+  justify-content: center;
+  display: grid;
+  padding: 20px 0px 30px 0px;
+}
+.photo-card {
+  width: 310px;
+  height: auto;
+}
+.card-author {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #86928b;
+}
+.card-name {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 35px;
+  color: #2c2d35;
+}
+.card-size {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21.13px;
+  color: #2c2d35;
+  margin-bottom: 25px;
+}
+.card-costs {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: #598d66;
+}
+.card-cart {
+  padding: 20px 60px 20px 60px;
+  border: 1px solid #598d66;
+  color: #598d66;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  background-color: #e1ede6;
+}
+.promo {
+  background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0.7),
+      transparent
+    ),
+    url("file:///C:/Users/khwra/Downloads/Rectangle%20(2).svg");
+  background-size: cover;
+  background-position: right;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 70px;
+  max-height: 600px;
+}
+.text {
+  align-items: center;
+  padding: 70px 200px 70px 0px;
+  max-width: 1110px;
+}
+.text-in {
+  display: flex;
+  max-width: 521px;
+  align-items: center;
+  gap: 20px;
+}
+.text-in-title {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 40px;
+  color: #f4f6f5;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+.promo-text {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #fff;
+  max-width: 540px;
+  margin-bottom: 60px;
+}
+.promo-button {
+  padding: 20px 60px 20px 60px;
+  background-color: #eedb6d;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  color: #2c2d35;
+  border: none;
+}
+.star-img {
+  max-width: 80px;
+  min-width: 50px;
+}
+.group {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  align-items: center;
+  margin-bottom: 70px;
+  padding: 0px 39px 0px 39px;
+}
+.about {
+  color: #2c2d35;
+}
+.about-h4 {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 44px;
+  margin-bottom: 20px;
+  margin-top: 70px;
+  max-width: ;
+}
+.about-p {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  margin-bottom: 20px;
+  max-width: 600px;
+}
+.about-images {
+  display: flex;
+  gap: 30px;
+}
+
+footer {
+  background-color: #e1ede6;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 23px 39px 23px 39px;
+}
+
+.contact-about {
+  display: flex;
+  justify-content: space-around;
+  gap: 250px;
+}
+.in {
+  margin-bottom: 35px;
+  color: #598d66;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+}
+.info {
+  display: flex;
+  width: 445px;
+  gap: 60px;
+}
+.social-media {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 10px;
+}
+.contact {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  color: #2c2d35;
+}
+.contact-span {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #86928b;
+}
+.info-h6 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  color: #2c2d35;
+  margin-bottom: 6px;
+}
+.info-ul {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #86928b;
+}
+.info-li {
+  margin-bottom: 6px;
+}
+.sm-span {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #86928b;
+}
+.sm {
+  width: 132px;
+}
+@media (max-width: 1075px) {
+  .hero-h1 {
+    font-size: 53px;
+    line-height: 53px;
+  }
+  .catalog-title {
+    gap: 180px;
+  }
+  footer {
+    display: block;
+  }
+  .contact-logo {
+    display: flex;
+    justify-content: space-between;
+  }
+  .contact-about {
+    justify-content: space-between;
+    gap: 0;
+  }
+  .promo {
+    height: 602px;
+  }
+  .promo-text {
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 930px) {
+  .hero-h1 {
+    font-size: 47px;
+    line-height: 47px;
+  }
+  .catalog-title {
+    gap: 45px;
+  }
+  .text {
+    padding: 70px 0px 70px 0px;
+  }
+  .promo {
+    height: 600px;
+  }
+}
+@media (max-width: 832px) {
+  nav {
+    gap: 102px;
+  }
+  a.nav-a {
+    font-size: 18px;
+    line-height: 21px;
+  }
+  .hero-h1 {
+    font-size: 40px;
+    line-height: 40px;
+  }
+  .hero-p {
+    margin-bottom: 40px;
+  }
+  .text-in-title {
+    font-size: 30px;
+    line-height: 30px;
+    margin-bottom: 30px;
+  }
+  .group {
+    display: block;
+    justify-content: center;
+  }
+
+  .card {
+    width: 330px;
+    height: 730px;
+    background-color: #e1ede6;
+    justify-content: center;
+    display: grid;
+    padding: 20px 20px 20px 20px;
+  }
+  .photo-card {
+    width: 290px;
+    height: auto;
+  }
+  .cards {
+    padding: 0px;
+  }
+  .promo {
+    height: 500px;
+  }
+}
+@media (max-width: 751px) {
+  nav {
+    display: block;
+    height: 123px;
+    gap: 16px;
+  }
+  .logo {
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+  }
+  .nav-links {
+    display: flex;
+    justify-content: space-between;
+  }
+  hr.nav {
+    border-color: #c3d1c6;
+    position: relative;
+  }
+  .hero {
+    padding: 0px 33px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  .hero-h1 {
+    font-size: 36px;
+    line-height: 36px;
+    margin-bottom: 10px;
+  }
+  .hero-p {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 11px;
+  }
+  .bird-img {
+    width: 195px;
+    transform: scale(1.2);
+  }
+  .hero-button {
+    font-size: 18px;
+    line-height: 21px;
+  }
+  .catalog {
+    display: block;
+  }
+  .catalog-title {
+    display: block;
+    margin-left: 20px;
+  }
+  .title-h2 {
+    margin-bottom: 10px;
+  }
+  .cards {
+    padding: 0px;
+  }
+  .title-h2 {
+    font-size: 24px;
+    line-height: 26px;
+  }
+  .group {
+    display: block;
+  }
+  .card {
+    width: 240px;
+    height: 514px;
+  }
+  .photo-card {
+    width: 200px;
+    height: auto;
+  }
+  .card-author {
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .card-name {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .card-size {
+    font-size: 16px;
+    line-height: 18.13px;
+    margin-bottom: 15px;
+  }
+  .card-costs {
+    font-size: 20px;
+    line-height: 23px;
+  }
+  .card-cart {
+    padding: 15px 40px 15px 40px;
+    font-size: 18px;
+    line-height: 21px;
+  }
+  hr {
+    border-color: #c3d1c6;
+    position: relative;
+  }
+  footer {
+    display: grid;
+    place-items: center;
+    padding: 23px 0px 23px 0px;
+  }
+  .info {
+    display: flex;
+    justify-content: space-between;
+  }
+  .contact-about {
+    display: grid;
+    place-items: center;
+  }
+  .contact-logo {
+    gap: 150px;
+  }
+  .sm {
+    display: contents;
+    justify-content: center;
+  }
+}
+@media (max-width: 520px) {
+  .bird-img {
+    position: absolute;
+    opacity: 0;
+  }
+  .text-in-title {
+    font-size: 24px;
+    line-height: 24px;
+    margin-bottom: 20px;
+  }
+  .promo-text {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .text {
+    padding-left: 10px;
+  }
+}
