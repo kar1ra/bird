@@ -23,13 +23,21 @@
           <span class="logo-name">Ink.House</span>
         </div>
         <hr />
-        <div class="nav-links">
-          <ul class="nav-ul">
-            <li><a href="#" class="nav-a">Репродукци</a></li>
-            <li><a href="#" class="nav-a">Новинки</a></li>
-            <li><a href="#" class="nav-a">О нас</a></li>
-          </ul>
-          <a href="#"><img src="images/cart.svg" alt="cart" width="24px" /></a>
+        <div class="nav-burger">
+          <input type="checkbox" id="burger-toggle" />
+          <label for="burger-toggle">
+            <span></span>
+          </label>
+          <div class="nav-links">
+            <ul class="nav-ul">
+              <li><a href="#" class="nav-a">Репродукци</a></li>
+              <li><a href="#" class="nav-a">Новинки</a></li>
+              <li><a href="#" class="nav-a">О нас</a></li>
+            </ul>
+            <a href="#"
+              ><img src="images/cart.svg" alt="cart" width="24px"
+            /></a>
+          </div>
         </div>
       </nav>
     </header>
@@ -48,12 +56,14 @@
     </div>
     <div class="catalog">
       <div class="catalog-title">
-        <h2 class="title-h2">Репродукции</h2>
-        <ul class="title-ul">
-          <li><button class="catalog-button">Франция</button></li>
-          <li><button class="catalog-button">Германия</button></li>
-          <li><button class="catalog-button">Англия</button></li>
-        </ul>
+        <button class="title-h2">Репродукции</button>
+        <div class="title-ul-out">
+          <ul class="title-ul">
+            <li><button class="catalog-button">Франция</button></li>
+            <li><button class="catalog-button">Германия</button></li>
+            <li><button class="catalog-button">Англия</button></li>
+          </ul>
+        </div>
       </div>
       <div class="cards">
         <div class="card">
@@ -126,7 +136,7 @@
       </div>
     </div>
     <div class="group">
-      <img src="images/frame.jpg" alt="frame" width="445px" />
+      <img src="images/frame.jpg" alt="frame" class="frame" />
       <div class="about">
         <span class="about-h4">Наша команда</span>
         <p class="about-p">
